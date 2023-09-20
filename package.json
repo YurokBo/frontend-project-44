@@ -1,0 +1,19 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "brain-game",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YurokBo/frontend-project-44.git"
+  },
+  "author": "Yuriy Bondaryuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YurokBo/frontend-project-44/issues"
+  },
+  "homepage": "https://github.com/YurokBo/frontend-project-44#readme"
+}
