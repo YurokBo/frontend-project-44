@@ -1,10 +1,14 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "brain-game",
+  "description": "brain-games",
   "main": "index.js",
   "scripts": {
     "test": "test"
+  },
+  "type": "module",
+  "bin": {
+    "brain-games": "bin/brain-games.js"
   },
   "repository": {
     "type": "git",
