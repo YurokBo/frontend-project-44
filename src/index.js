@@ -15,3 +15,13 @@ export const showWrongAnswerText = ({ incorrectAnswer, correctAnswer, userName }
 export const getRandomNumber = (range) => Math.floor(Math.random() * range);
 
 export const getAnswer = ({ question }) => readlineSync.question(`${question}: `);
+
+export const findGcd = (firstNum, secondNum) => {
+  if (secondNum > firstNum) {
+    return findGcd(secondNum, firstNum);
+  }
+  if (!secondNum) {
+    return firstNum;
+  }
+  return findGcd(secondNum, firstNum % secondNum);
+};
