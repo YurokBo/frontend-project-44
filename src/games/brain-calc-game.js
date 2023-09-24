@@ -10,11 +10,12 @@ console.log('What is the result of the expression?');
 
 export default function gameCalculation() {
   const mathOperators = ['+', '-', '*'];
+  const mathOperatorsLength = mathOperators.length;
   let result = '';
   let i = 0;
 
   while (i < STEPS) {
-    const randomMathOperator = mathOperators[getRandomNumber(3)];
+    const randomMathOperator = mathOperators[getRandomNumber(mathOperatorsLength)];
     const randomLeftOperand = getRandomNumber(11) + 1;
     const randomRightOperand = getRandomNumber(11) + 1;
     const operationString = `${randomLeftOperand} ${randomMathOperator} ${randomRightOperand}`;
