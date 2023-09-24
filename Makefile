@@ -13,3 +13,11 @@ publish:
 lint:
 	npx eslint .
 
+up-major-version:
+	npm version major
+
+up-version-minor:
+	npm version minor
+
+up-patch-version:
+	npm version patch
