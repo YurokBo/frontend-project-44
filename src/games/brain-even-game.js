@@ -1,7 +1,7 @@
-import readlineSync from 'readline-sync';
+import { getUserName, greeting } from '../cli.js';
 import {
-  askQuestion, congratulation, getUserName, greeting, showWrongAnswerText,
-} from '../utils/cli.js';
+  askQuestion, congratulation, getAnswer, getRandomNumber, showWrongAnswerText,
+} from '../index.js';
 import STEPS from '../utils/constants.js';
 
 const userName = getUserName();
@@ -12,10 +12,10 @@ export default function gameEvenOrOdd() {
   let i = 0;
 
   while (i < STEPS) {
-    const randomNumber = Math.floor(Math.random() * 11) + 1;
+    const randomNumber = getRandomNumber(11) + 1;
     askQuestion(randomNumber);
 
-    const answer = readlineSync.question('Your answer: ').toLowerCase();
+    const answer = getAnswer({ question: 'Your answer' }).toLowerCase();
     const isYesAnswer = answer === 'yes';
     const isNoAnswer = answer === 'no';
     const hasDivisionRemainder = randomNumber % 2 !== 0;

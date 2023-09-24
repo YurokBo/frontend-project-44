@@ -1,7 +1,7 @@
-import readlineSync from 'readline-sync';
+import { getUserName, greeting } from '../cli.js';
 import {
-  askQuestion, congratulation, getUserName, greeting, showWrongAnswerText,
-} from '../utils/cli.js';
+  askQuestion, showWrongAnswerText, congratulation, getRandomNumber, getAnswer,
+} from '../index.js';
 import STEPS from '../utils/constants.js';
 
 const userName = getUserName();
@@ -14,9 +14,9 @@ export default function gameCalculation() {
   let i = 0;
 
   while (i < STEPS) {
-    const randomMathOperator = mathOperators[Math.floor(Math.random() * 3)];
-    const randomLeftOperand = Math.floor(Math.random() * 11) + 1;
-    const randomRightOperand = Math.floor(Math.random() * 11) + 1;
+    const randomMathOperator = mathOperators[getRandomNumber(3)];
+    const randomLeftOperand = getRandomNumber(11) + 1;
+    const randomRightOperand = getRandomNumber(11) + 1;
     const operationString = `${randomLeftOperand} ${randomMathOperator} ${randomRightOperand}`;
 
     askQuestion(operationString);
@@ -32,7 +32,7 @@ export default function gameCalculation() {
         result = randomLeftOperand * randomRightOperand;
     }
 
-    const answer = Number(readlineSync.question('Your answer: '));
+    const answer = Number(getAnswer({ question: 'Your answer' }));
 
     if (answer !== result) {
       showWrongAnswerText({ correctAnswer: answer, incorrectAnswer: result, userName });
