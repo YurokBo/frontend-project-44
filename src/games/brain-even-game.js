@@ -1,19 +1,19 @@
 import readlineSync from 'readline-sync';
-import { congratulation, getUserName, greeting } from './cli.js';
+import {
+  askQuestion, congratulation, getUserName, greeting, showWrongAnswerText,
+} from '../utils/cli.js';
+import STEPS from '../utils/constants.js';
+
+const userName = getUserName();
+greeting(userName);
+console.log('Answer "yes" if the number is even, otherwise answer "no".');
 
 export default function gameEvenOrOdd() {
-  const userName = getUserName();
-  const steps = 3;
   let i = 0;
 
-  greeting(userName);
-  console.log('Answer "yes" if the number is even, otherwise answer "no".');
-
-  while (i < steps) {
+  while (i < STEPS) {
     const randomNumber = Math.floor(Math.random() * 11) + 1;
-    const question = `Question: ${randomNumber}`;
-
-    console.log(question);
+    askQuestion(randomNumber);
 
     const answer = readlineSync.question('Your answer: ').toLowerCase();
     const isYesAnswer = answer === 'yes';
@@ -30,7 +30,7 @@ export default function gameEvenOrOdd() {
 
     if (!isCorrect) {
       const correctAnswer = answer === 'yes' ? 'no' : 'yes';
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.\nLet's try again, ${userName}!`);
+      showWrongAnswerText({ incorrectAnswer: answer, correctAnswer, userName });
 
       return;
     }

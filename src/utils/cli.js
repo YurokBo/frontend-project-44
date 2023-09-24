@@ -12,3 +12,11 @@ export const greeting = (name) => {
 export const congratulation = (name) => {
   console.log(`Congratulations, ${name}!`);
 };
+
+export const askQuestion = (question) => {
+  console.log(`Question: ${question}`);
+};
+
+export const showWrongAnswerText = ({ incorrectAnswer, correctAnswer, userName }) => {
+  console.log(`'${incorrectAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.\nLet's try again, ${userName}!`);
+};
