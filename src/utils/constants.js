@@ -1,3 +1,2 @@
-const STEPS = 3;
-
-export default STEPS;
+export const STEPS = 3;
+export const MATH_OPERATORS = ['+', '-', '*'];

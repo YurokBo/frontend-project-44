@@ -2,7 +2,7 @@ import { getUserName, greeting } from '../cli.js';
 import {
   askQuestion, congratulation, getAnswer, getRandomNumber, showWrongAnswerText,
 } from '../index.js';
-import STEPS from '../utils/constants.js';
+import { STEPS } from '../utils/constants.js';
 
 const userName = getUserName();
 greeting(userName);

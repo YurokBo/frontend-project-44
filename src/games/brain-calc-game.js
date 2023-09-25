@@ -2,20 +2,19 @@ import { getUserName, greeting } from '../cli.js';
 import {
   askQuestion, showWrongAnswerText, congratulation, getRandomNumber, getAnswer,
 } from '../index.js';
-import STEPS from '../utils/constants.js';
+import { STEPS, MATH_OPERATORS } from '../utils/constants.js';
 
 const userName = getUserName();
 greeting(userName);
 console.log('What is the result of the expression?');
 
 export default function gameCalculation() {
-  const mathOperators = ['+', '-', '*'];
-  const mathOperatorsLength = mathOperators.length;
+  const mathOperatorsLength = MATH_OPERATORS.length;
   let result = '';
   let i = 0;
 
   while (i < STEPS) {
-    const randomMathOperator = mathOperators[getRandomNumber(mathOperatorsLength)];
+    const randomMathOperator = MATH_OPERATORS[getRandomNumber(mathOperatorsLength)];
     const randomLeftOperand = getRandomNumber(11) + 1;
     const randomRightOperand = getRandomNumber(11) + 1;
     const operationString = `${randomLeftOperand} ${randomMathOperator} ${randomRightOperand}`;

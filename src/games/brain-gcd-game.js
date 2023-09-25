@@ -1,5 +1,5 @@
 import { getUserName, greeting } from '../cli.js';
-import STEPS from '../utils/constants.js';
+import { STEPS } from '../utils/constants.js';
 import {
   askQuestion, congratulation, getRandomNumber, findGcd, getAnswer, showWrongAnswerText,
 } from '../index.js';

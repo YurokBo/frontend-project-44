@@ -1,7 +1,7 @@
 import readlineSync from 'readline-sync';
 
-export const congratulation = (name) => {
-  console.log(`Congratulations, ${name}!`);
+export const congratulation = (userName) => {
+  console.log(`Congratulations, ${userName}!`);
 };
 
 export const askQuestion = (question) => {
