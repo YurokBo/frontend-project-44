@@ -1,6 +1,6 @@
 {
   "name": "@hexlet/code",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "brain-games",
   "main": "index.js",
   "scripts": {
