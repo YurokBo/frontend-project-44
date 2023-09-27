@@ -4,11 +4,11 @@ import {
 } from '../index.js';
 import { STEPS, MATH_OPERATORS } from '../utils/constants.js';
 
-const userName = getUserName();
-greeting(userName);
-console.log('What is the result of the expression?');
+export default function startBrainCalculationGame() {
+  const userName = getUserName();
+  greeting(userName);
+  console.log('What is the result of the expression?');
 
-export default function gameCalculation() {
   const mathOperatorsLength = MATH_OPERATORS.length;
   let result = '';
   let i = 0;

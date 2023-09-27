@@ -8,11 +8,11 @@ import {
 } from '../index.js';
 import { STEPS } from '../utils/constants.js';
 
-const userName = getUserName();
-greeting(userName);
-console.log('What number is missing in the progression?');
+export default function startBrainProgressionGame() {
+  const userName = getUserName();
+  greeting(userName);
+  console.log('What number is missing in the progression?');
 
-export default function startBrainProgression() {
   let i = 0;
 
   while (i < STEPS) {

@@ -4,11 +4,11 @@ import {
   showQuestion, congratulation, getRandomNumber, findGcd, getAnswer, showWrongAnswerText,
 } from '../index.js';
 
-const userName = getUserName();
-greeting(userName);
-console.log('Find the greatest common divisor of given numbers.');
+export default function startBrainGreatestCommonDivisorGame() {
+  const userName = getUserName();
+  greeting(userName);
+  console.log('Find the greatest common divisor of given numbers.');
 
-export default function getGreatestCommonDivisor() {
   let i = 0;
 
   while (i < STEPS) {
