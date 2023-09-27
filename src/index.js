@@ -4,7 +4,7 @@ export const congratulation = (userName) => {
   console.log(`Congratulations, ${userName}!`);
 };
 
-export const askQuestion = (question) => {
+export const showQuestion = (question) => {
   if (Array.isArray(question)) {
     console.log('Question:', ...question);
 
@@ -19,36 +19,38 @@ export const showWrongAnswerText = ({ incorrectAnswer, correctAnswer, userName }
 
 export const getRandomNumber = (range = 0) => Math.floor(Math.random() * range);
 
-export const getAnswer = ({ question }) => readlineSync.question(`${question}: `);
+export const getAnswer = ({ text }) => readlineSync.question(`${text}: `);
 
 export const findGcd = (firstNum, secondNum) => {
   if (secondNum > firstNum) {
     return findGcd(secondNum, firstNum);
   }
+
   if (!secondNum) {
     return firstNum;
   }
+
   return findGcd(secondNum, firstNum % secondNum);
 };
 
-export const generateRandomProgression = () => {
-  const progressionLength = getRandomNumber(6) + 5;
-  const progressionStartValue = getRandomNumber(101);
-  const progressionRange = getRandomNumber(10) + 10;
+export const generateRandomProgression = ({ length, startValue, range }) => {
+  const progressionLength = getRandomNumber(length) + 5;
+  const progressionStartValue = getRandomNumber(startValue);
+  const progressionRange = getRandomNumber(range) + 10;
   const hiddenIndex = getRandomNumber(progressionLength);
-  let currentValue = progressionStartValue;
   const progression = [];
+  let currentValue = progressionStartValue;
   let correctResult;
 
   for (let i = 0; i < progressionLength; i += 1) {
     if (i === hiddenIndex) {
       correctResult = currentValue;
       progression.push('..');
-      currentValue += progressionRange;
     } else {
-      progression.push(`${currentValue}`);
-      currentValue += progressionRange;
+      progression.push(currentValue);
     }
+
+    currentValue += progressionRange;
   }
 
   return { correctResult, progression };

@@ -1,23 +1,24 @@
 import { getUserName, greeting } from '../cli.js';
 import {
-  askQuestion, congratulation, getAnswer, getRandomNumber, showWrongAnswerText,
+  showQuestion, congratulation, getAnswer, getRandomNumber, showWrongAnswerText,
 } from '../index.js';
-import { STEPS } from '../utils/constants.js';
+import { STEPS, ANSWER_TYPES } from '../utils/constants.js';
 
 const userName = getUserName();
 greeting(userName);
 console.log('Answer "yes" if the number is even, otherwise answer "no".');
 
 export default function gameEvenOrOdd() {
+  const { YES, NO } = ANSWER_TYPES;
   let i = 0;
 
   while (i < STEPS) {
     const randomNumber = getRandomNumber(11) + 1;
-    askQuestion(randomNumber);
+    showQuestion(randomNumber);
 
-    const answer = getAnswer({ question: 'Your answer' }).toLowerCase();
-    const isYesAnswer = answer === 'yes';
-    const isNoAnswer = answer === 'no';
+    const answer = getAnswer({ text: 'Your answer' }).toLowerCase();
+    const isYesAnswer = answer === YES;
+    const isNoAnswer = answer === NO;
     const hasDivisionRemainder = randomNumber % 2 !== 0;
     const isCorrect = (!hasDivisionRemainder && isYesAnswer)
       || (hasDivisionRemainder && isNoAnswer);
@@ -29,7 +30,7 @@ export default function gameEvenOrOdd() {
     }
 
     if (!isCorrect) {
-      const correctAnswer = answer === 'yes' ? 'no' : 'yes';
+      const correctAnswer = answer === YES ? NO : YES;
       showWrongAnswerText({ incorrectAnswer: answer, correctAnswer, userName });
 
       return;

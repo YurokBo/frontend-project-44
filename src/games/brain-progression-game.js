@@ -1,6 +1,6 @@
 import { getUserName, greeting } from '../cli.js';
 import {
-  askQuestion,
+  showQuestion,
   congratulation,
   generateRandomProgression,
   getAnswer,
@@ -16,9 +16,14 @@ export default function startBrainProgression() {
   let i = 0;
 
   while (i < STEPS) {
-    const { correctResult, progression } = generateRandomProgression();
-    askQuestion(progression);
-    const answer = getAnswer({ question: 'Your answer' });
+    const { correctResult, progression } = generateRandomProgression({
+      length: 6,
+      startValue: 101,
+      range: 10,
+    });
+
+    showQuestion(progression);
+    const answer = getAnswer({ text: 'Your answer' });
 
     if (Number(answer) !== correctResult) {
       showWrongAnswerText({ incorrectAnswer: answer, correctAnswer: correctResult, userName });

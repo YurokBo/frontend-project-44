@@ -1,6 +1,6 @@
 import { getUserName, greeting } from '../cli.js';
 import {
-  askQuestion, showWrongAnswerText, congratulation, getRandomNumber, getAnswer,
+  showQuestion, showWrongAnswerText, congratulation, getRandomNumber, getAnswer,
 } from '../index.js';
 import { STEPS, MATH_OPERATORS } from '../utils/constants.js';
 
@@ -19,7 +19,7 @@ export default function gameCalculation() {
     const randomRightOperand = getRandomNumber(11) + 1;
     const operationString = `${randomLeftOperand} ${randomMathOperator} ${randomRightOperand}`;
 
-    askQuestion(operationString);
+    showQuestion(operationString);
 
     switch (randomMathOperator) {
       case '+':
@@ -32,7 +32,7 @@ export default function gameCalculation() {
         result = randomLeftOperand * randomRightOperand;
     }
 
-    const answer = Number(getAnswer({ question: 'Your answer' }));
+    const answer = Number(getAnswer({ text: 'Your answer' }));
 
     if (answer !== result) {
       showWrongAnswerText({ correctAnswer: answer, incorrectAnswer: result, userName });

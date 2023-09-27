@@ -1,7 +1,7 @@
 import { getUserName, greeting } from '../cli.js';
 import { STEPS } from '../utils/constants.js';
 import {
-  askQuestion, congratulation, getRandomNumber, findGcd, getAnswer, showWrongAnswerText,
+  showQuestion, congratulation, getRandomNumber, findGcd, getAnswer, showWrongAnswerText,
 } from '../index.js';
 
 const userName = getUserName();
@@ -16,10 +16,10 @@ export default function getGreatestCommonDivisor() {
     const randomNumber2 = getRandomNumber(11) + 1;
     const questionString = `${randomNumber1} ${randomNumber2}`;
 
-    askQuestion(questionString);
+    showQuestion(questionString);
 
     const result = findGcd(randomNumber1, randomNumber2);
-    const answer = Number(getAnswer({ question: 'Your answer' }));
+    const answer = Number(getAnswer({ text: 'Your answer' }));
 
     if (result !== answer) {
       showWrongAnswerText({ correctAnswer: result, incorrectAnswer: answer, userName });
