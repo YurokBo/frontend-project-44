@@ -1,8 +1,20 @@
+import readlineSync from 'readline-sync';
 import { getUserName, greeting } from '../cli.js';
-import { STEPS } from '../utils/constants.js';
 import {
-  showQuestion, congratulation, getRandomNumber, findGcd, getAnswer, showWrongAnswerText,
+  showQuestion, getRandomNumber, showWrongAnswerText,
 } from '../index.js';
+
+const findGcd = (firstNum, secondNum) => {
+  if (secondNum > firstNum) {
+    return findGcd(secondNum, firstNum);
+  }
+
+  if (!secondNum) {
+    return firstNum;
+  }
+
+  return findGcd(secondNum, firstNum % secondNum);
+};
 
 export default function startBrainGreatestCommonDivisorGame() {
   const userName = getUserName();
@@ -11,15 +23,15 @@ export default function startBrainGreatestCommonDivisorGame() {
 
   let i = 0;
 
-  while (i < STEPS) {
-    const randomNumber1 = getRandomNumber(11) + 1;
-    const randomNumber2 = getRandomNumber(11) + 1;
+  while (i < 3) {
+    const randomNumber1 = getRandomNumber({ min: 1, max: 11 });
+    const randomNumber2 = getRandomNumber({ min: 1, max: 11 });
     const questionString = `${randomNumber1} ${randomNumber2}`;
 
     showQuestion(questionString);
 
     const result = findGcd(randomNumber1, randomNumber2);
-    const answer = Number(getAnswer({ text: 'Your answer' }));
+    const answer = Number(readlineSync.question('Your answer: '));
 
     if (result !== answer) {
       showWrongAnswerText({ correctAnswer: result, incorrectAnswer: answer, userName });
@@ -32,5 +44,5 @@ export default function startBrainGreatestCommonDivisorGame() {
     i += 1;
   }
 
-  congratulation(userName);
+  console.log(`Congratulations, ${userName}!`);
 }

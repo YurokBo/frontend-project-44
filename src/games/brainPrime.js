@@ -1,29 +1,34 @@
+import readlineSync from 'readline-sync';
 import {
-  congratulation,
-  getAnswer,
   getRandomNumber,
-  isPrime,
   showQuestion,
   showWrongAnswerText,
 } from '../index.js';
 import { getUserName, greeting } from '../cli.js';
-import { ANSWER_TYPES, STEPS } from '../utils/constants.js';
+
+const isPrime = (number) => {
+  for (let i = 2; i < number; i += 1) {
+    if (number % i === 0 && number !== 1) {
+      return 'no';
+    }
+  }
+
+  return 'yes';
+};
 
 export default function startBrainPrimeGame() {
   const userName = getUserName();
   greeting(userName);
   console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
-
-  const { YES, NO } = ANSWER_TYPES;
   let i = 0;
 
-  while (i < STEPS) {
-    const randomNumber = getRandomNumber(100) + 1;
+  while (i < 3) {
+    const randomNumber = getRandomNumber({ min: 1, max: 100 });
     const correctAnswer = isPrime(randomNumber);
     showQuestion(randomNumber);
-    const answer = getAnswer({ text: 'Your answer' }).toLowerCase();
-    const isYesAnswer = answer === YES;
-    const isNoAnswer = answer === NO;
+    const answer = readlineSync.question('Your answer: ').toLowerCase();
+    const isYesAnswer = answer === 'yes';
+    const isNoAnswer = answer === 'no';
     const isCorrect = answer === correctAnswer || answer === isNoAnswer;
 
     if (!isYesAnswer && !isNoAnswer) {
@@ -43,5 +48,5 @@ export default function startBrainPrimeGame() {
     i += 1;
   }
 
-  congratulation(userName);
+  console.log(`Congratulations, ${userName}!`);
 }

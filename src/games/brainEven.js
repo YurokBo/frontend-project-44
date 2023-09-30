@@ -1,30 +1,29 @@
+import readlineSync from 'readline-sync';
 import { getUserName, greeting } from '../cli.js';
 import {
   showQuestion,
-  congratulation,
-  getAnswer,
   getRandomNumber,
   showWrongAnswerText,
 } from '../index.js';
-import { STEPS, ANSWER_TYPES } from '../utils/constants.js';
+
+const hasDivisionRemainder = (number) => number % 2 !== 0;
 
 export default function startBrainEvenOrOddGame() {
   const userName = getUserName();
   greeting(userName);
   console.log('Answer "yes" if the number is even, otherwise answer "no".');
-  const { YES, NO } = ANSWER_TYPES;
   let i = 0;
 
-  while (i < STEPS) {
-    const randomNumber = getRandomNumber(11) + 1;
+  while (i < 3) {
+    const randomNumber = getRandomNumber({ min: 1, max: 11 });
     showQuestion(randomNumber);
 
-    const answer = getAnswer({ text: 'Your answer' }).toLowerCase();
-    const isYesAnswer = answer === YES;
-    const isNoAnswer = answer === NO;
-    const hasDivisionRemainder = randomNumber % 2 !== 0;
-    const isCorrect = (!hasDivisionRemainder && isYesAnswer)
-      || (hasDivisionRemainder && isNoAnswer);
+    const answer = readlineSync.question('Your answer: ').toLowerCase();
+    const isYesAnswer = answer === 'yes';
+    const isNoAnswer = answer === 'no';
+    const isDivisionRemainder = hasDivisionRemainder(randomNumber);
+    const isCorrect = (!isDivisionRemainder && isYesAnswer)
+      || (isDivisionRemainder && isNoAnswer);
 
     if (!isYesAnswer && !isNoAnswer) {
       console.log(`It is wrong input ;(. Correct input is "no" or "yes".\nLet's try again, ${userName}!`);
@@ -33,7 +32,7 @@ export default function startBrainEvenOrOddGame() {
     }
 
     if (!isCorrect) {
-      const correctAnswer = answer === YES ? NO : YES;
+      const correctAnswer = answer === 'yes' ? 'no' : 'yes';
       showWrongAnswerText({ incorrectAnswer: answer, correctAnswer, userName });
 
       return;
@@ -44,5 +43,5 @@ export default function startBrainEvenOrOddGame() {
     i += 1;
   }
 
-  congratulation(userName);
+  console.log(`Congratulations, ${userName}!`);
 }
