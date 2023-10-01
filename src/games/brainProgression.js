@@ -1,10 +1,4 @@
-import readlineSync from 'readline-sync';
-import { getUserName, greeting } from '../cli.js';
-import {
-  showQuestion,
-  showWrongAnswerText,
-  getRandomNumber,
-} from '../index.js';
+import { getRandomNumber, gameControl } from '../index.js';
 
 const generateRandomProgression = () => {
   const progressionLength = getRandomNumber({ min: 5, max: 6 });
@@ -29,28 +23,17 @@ const generateRandomProgression = () => {
   return { correctResult, progression };
 };
 
-export default function startBrainProgressionGame() {
-  const userName = getUserName();
-  greeting(userName);
-  console.log('What number is missing in the progression?');
+const generateQuestionAndAnswer = () => {
+  const { correctResult, progression } = generateRandomProgression();
+  const generateQuestion = progression;
+  const generateAnswer = correctResult;
 
-  let i = 0;
+  return { generateQuestion, generateAnswer };
+};
 
-  while (i < 3) {
-    const { correctResult, progression } = generateRandomProgression();
-
-    showQuestion(progression);
-    const answer = readlineSync.question('Your answer: ');
-
-    if (Number(answer) !== correctResult) {
-      showWrongAnswerText({ incorrectAnswer: answer, correctAnswer: correctResult, userName });
-      return;
-    }
-
-    console.log('Correct!');
-
-    i += 1;
-  }
-
-  console.log(`Congratulations, ${userName}!`);
+export default function startBrainProgression() {
+  gameControl({
+    gameDescription: 'What number is missing in the progression?',
+    generateQuestionAndAnswer,
+  });
 }
