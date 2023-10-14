@@ -1,18 +1,18 @@
-import { getRandomNumber, gameControl } from '../index.js';
+import gameControl from '../index.js';
+import getRandomNumber from '../helpers.js';
 
-const hasDivisionRemainder = (number) => number % 2 !== 0;
+const isEven = (number) => number % 2 === 0;
 
-const generateQuestionAndAnswer = () => {
-  const generateQuestion = getRandomNumber({ min: 1, max: 11 });
-  const isDivisionRemainder = hasDivisionRemainder(generateQuestion);
-  const generateAnswer = isDivisionRemainder ? 'no' : 'yes';
+const generateRound = () => {
+  const number = getRandomNumber({ min: 1, max: 11 });
+  const correctAnswer = isEven(number) ? 'yes' : 'no';
 
-  return { generateQuestion, generateAnswer };
+  return { question: number, correctAnswer };
 };
 
-export default function startBrainEvenOrOdd() {
+export default function startBrainEven() {
   gameControl({
-    gameDescription: 'Answer "yes" if the number is even, otherwise answer "no".',
-    generateQuestionAndAnswer,
+    gameQuestion: 'Answer "yes" if the number is even, otherwise answer "no".',
+    generateRound,
   });
 }

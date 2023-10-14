@@ -1,39 +1,46 @@
-import { getRandomNumber, gameControl } from '../index.js';
+import gameControl from '../index.js';
+import getRandomNumber from '../helpers.js';
 
-const generateRandomProgression = () => {
-  const progressionLength = getRandomNumber({ min: 5, max: 6 });
-  const progressionStartValue = getRandomNumber({ min: 1, max: 101 });
-  const progressionRange = getRandomNumber({ min: 10, max: 10 });
-  const hiddenIndex = getRandomNumber({ min: 0, max: progressionLength });
+const generateProgression = ({
+  startValue, length, range, hiddenIndex,
+}) => {
   const progression = [];
-  let currentValue = progressionStartValue;
-  let correctResult;
+  let currentValue = startValue;
+  let hiddenValue;
 
-  for (let i = 0; i < progressionLength; i += 1) {
+  for (let i = 0; i < length; i += 1) {
     if (i === hiddenIndex) {
-      correctResult = currentValue;
+      hiddenValue = currentValue;
       progression.push('..');
     } else {
       progression.push(currentValue);
     }
 
-    currentValue += progressionRange;
+    currentValue += range;
   }
 
-  return { correctResult, progression };
+  return { hiddenValue, progression };
 };
 
-const generateQuestionAndAnswer = () => {
-  const { correctResult, progression } = generateRandomProgression();
-  const generateQuestion = progression;
-  const generateAnswer = correctResult;
+const generateRound = () => {
+  const length = getRandomNumber({ min: 5, max: 6 });
+  const startValue = getRandomNumber({ min: 1, max: 101 });
+  const range = getRandomNumber({ min: 10, max: 10 });
+  const hiddenIndex = getRandomNumber({ min: 0, max: length });
 
-  return { generateQuestion, generateAnswer };
+  const { hiddenValue, progression } = generateProgression({
+    startValue, length, range, hiddenIndex,
+  });
+
+  return {
+    question: progression.join(' '),
+    correctAnswer: hiddenValue.toString(),
+  };
 };
 
 export default function startBrainProgression() {
   gameControl({
-    gameDescription: 'What number is missing in the progression?',
-    generateQuestionAndAnswer,
+    gameQuestion: 'What number is missing in the progression?',
+    generateRound,
   });
 }

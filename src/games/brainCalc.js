@@ -1,47 +1,40 @@
-import { getRandomNumber, gameControl } from '../index.js';
+import gameControl from '../index.js';
+import getRandomNumber from '../helpers.js';
 
-const getMathOperationResult = ({ operator, leftOperand, rightOperand }) => {
-  let result = '';
-
+const getMathOperationResult = ({ operator, number1, number2 }) => {
   switch (operator) {
     case '+':
-      result = leftOperand + rightOperand;
-      break;
+      return number1 + number2;
     case '-':
-      result = leftOperand - rightOperand;
-      break;
+      return number1 - number2;
     case '*':
-      result = leftOperand * rightOperand;
-      break;
+      return number1 * number2;
     default:
       throw new Error(`Incorrect operator: '${operator}'!`);
   }
-
-  return Number(result);
 };
 
-const generateQuestionAndAnswer = () => {
-  const mathOperators = ['+', '-', '*'];
-  const mathOperatorsLength = mathOperators.length;
-  const randomMathOperator = mathOperators[getRandomNumber({
+const generateRound = () => {
+  const operators = ['+', '-', '*'];
+  const randomOperator = operators[getRandomNumber({
     min: 0,
-    max: mathOperatorsLength,
+    max: operators.length,
   })];
-  const randomLeftOperand = getRandomNumber({ min: 1, max: 11 });
-  const randomRightOperand = getRandomNumber({ min: 1, max: 11 });
-  const generateQuestion = `${randomLeftOperand} ${randomMathOperator} ${randomRightOperand}`;
-  const generateAnswer = getMathOperationResult({
-    operator: randomMathOperator,
-    leftOperand: randomLeftOperand,
-    rightOperand: randomRightOperand,
-  });
+  const number1 = getRandomNumber({ min: 1, max: 11 });
+  const number2 = getRandomNumber({ min: 1, max: 11 });
+  const question = `${number1} ${randomOperator} ${number2}`;
+  const correctAnswer = getMathOperationResult({
+    operator: randomOperator,
+    number1,
+    number2,
+  }).toString();
 
-  return { generateQuestion, generateAnswer };
+  return { question, correctAnswer };
 };
 
 export default function startBrainCalc() {
   gameControl({
-    gameDescription: 'What is the result of the expression?',
-    generateQuestionAndAnswer,
+    gameQuestion: 'What is the result of the expression?',
+    generateRound,
   });
 }
