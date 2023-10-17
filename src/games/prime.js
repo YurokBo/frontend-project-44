@@ -1,4 +1,4 @@
-import gameControl from '../index.js';
+import runEngine from '../index.js';
 import getRandomNumber from '../helpers.js';
 
 const isPrime = (number) => {
@@ -13,13 +13,13 @@ const isPrime = (number) => {
 
 const generateRound = () => {
   const question = getRandomNumber({ min: 1, max: 100 });
-  const correctAnswer = isPrime(question);
+  const answer = isPrime(question);
 
-  return { question, correctAnswer };
+  return { question, answer };
 };
 
-export default function startBrainPrime() {
-  gameControl({
+export default function startPrime() {
+  runEngine({
     gameQuestion: 'Answer "yes" if given number is prime. Otherwise answer "no".',
     generateRound,
   });
