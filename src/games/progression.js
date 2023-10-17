@@ -22,8 +22,8 @@ const generateRound = () => {
     startValue, length, range,
   });
 
-  const answer = progression[index].toString();
-  progression.splice(index, 1, '..');
+  const answer = progression[index - 1].toString();
+  progression.splice(index - 1, 1, '..');
 
   return {
     question: progression.join(' '),
