@@ -18,7 +18,7 @@ const generateRound = () => {
   const operators = ['+', '-', '*'];
   const randomOperator = operators[getRandomNumber({
     min: 0,
-    max: operators.length,
+    max: operators.length - 1,
   })];
   const number1 = getRandomNumber({ min: 1, max: 11 });
   const number2 = getRandomNumber({ min: 1, max: 11 });
