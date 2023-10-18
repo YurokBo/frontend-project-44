@@ -20,10 +20,10 @@ const generateRound = () => {
   const progression = generateProgression({
     startValue, length, range,
   });
-  const index = getRandomNumber({ min: 0, max: progression.length - 1 });
+  const hiddenIndex = getRandomNumber({ min: 0, max: progression.length - 1 });
 
-  const answer = progression[index].toString();
-  progression[index] = '..';
+  const answer = progression[hiddenIndex].toString();
+  progression[hiddenIndex] = '..';
 
   return {
     question: progression.join(' '),
