@@ -17,13 +17,13 @@ const generateRound = () => {
   const length = getRandomNumber({ min: 5, max: 10 });
   const startValue = getRandomNumber({ min: 1, max: 100 });
   const range = getRandomNumber({ min: 1, max: 20 });
-  const index = getRandomNumber({ min: 0, max: length - 1 });
   const progression = generateProgression({
     startValue, length, range,
   });
+  const index = getRandomNumber({ min: 0, max: progression.length - 1 });
 
   const answer = progression[index].toString();
-  progression.splice(index, 1, '..');
+  progression[index] = '..';
 
   return {
     question: progression.join(' '),
